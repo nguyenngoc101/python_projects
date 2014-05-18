@@ -1,5 +1,3 @@
-import parent.child
-
 class EmptyException(Exception):
     def __init__(self, message):
         Exception.__init__(self, message)
@@ -16,10 +14,27 @@ class Stack:
         if(len(self.itemList) > 0):
             return self.itemList.pop()
         else:
-            raise EmptyException
+            raise EmptyException("Empty Stack Error")
 
     def is_empty(self):
-        return True if len(self.itemList) > 0 else False
-    
+        return True if self.size() == 0 else False
+
     def size(self):
         return len(self.itemList)
+
+def convertBinary(int_input):
+    converted_binary=""
+    stack = Stack()
+    while True:
+        # stack.push(0) if int_input % 2 else stack.push(1)
+        stack.push((int_input % 2))
+        int_input /= 2
+        if int_input < 1:
+            break
+    while not stack.is_empty():
+        converted_binary += str(stack.pop())
+
+    return  converted_binary
+
+if __name__=="__main__":
+   print "converted binary: %s" % convertBinary(22222)
