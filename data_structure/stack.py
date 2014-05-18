@@ -36,5 +36,3 @@ def convertBinary(int_input):
 
     return  converted_binary
 
-if __name__=="__main__":
-   print "converted binary: %s" % convertBinary(22222)
