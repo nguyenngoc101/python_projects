@@ -16,21 +16,26 @@ best = []
 print  best
 def exchangeMoney(n):
     best = [10000]*n
-    best.append(0)
-    for i in (1, n):
+    best.insert(0, 0)
+    coin = None
+    exchanges = [[]]*(n+1)
+    for i in range(1, n+1):
         min = 10000
-        for c in coins:
-            if i - c  >= 0:
-                print "i-c: %d" % (i-c)
-                if best[i-c] < min:
-                    min = best[i-c]
+        exchanges.insert(i, [])
+        for c in [x in coins if i-x >= 0]:
+            if best[i-c] < min:
+                min = best[i-c]
+                coin = c
         if min != 10000:
             best.insert(i, min + 1)
+            exchanges[i].extend(exchanges[i-coin])
+            exchanges[i].extend([coin])
         else:
-            print "eo doi tien cho % duoc" % i
             best.insert(i, 10000)
+        print "i= %d" % i
+        print "exchanges[%d]: %s" % (i, exchanges[i])
+        print "best[%d]: %s" % (i, best[i])
 
-    return best[n]
 
 if __name__=="__main__":
-    print exchangeMoney(5)
+    exchangeMoney(9)
