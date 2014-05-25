@@ -2,7 +2,7 @@ def binarySearch(key, array, first, last):
     pivot = (first + last)/2
     if first > last:
         return -1
-    if key  == array[pivot]:
+    if key == array[pivot]:
         return pivot
     if key > array[pivot]:
        return binarySearch(key, array, pivot+1, last)
