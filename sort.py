@@ -1,6 +1,7 @@
 from timeit import Timer
 from random import *
 import time
+import pdb
 
 def bubbleSort(array):
     size = len(array)
@@ -120,26 +121,25 @@ def mergeSort2(alist):
     return alist
 
 def quickSort(array, first, last):
-    if first < last:
-        pivot = partition(array, first, last)
+    pivot = partition(array, first, last)
+    if first < pivot - 1:
         quickSort(array, first, pivot-1)
-        quickSort(array, pivot+1, last)
+    if pivot < last:
+        quickSort(array, pivot, last)
 
 def partition(a, first, last):
-    pivot = (first + last)/2
-    bare = a[pivot]
+    pivot = a[(first + last)/2]
     i, j = first, last
-    while i < j:
-        while i < j and a[i] <= bare:
+    while i<=j:
+        while a[i] < pivot:
             i += 1
-        while i < j and a[j] > bare:
+        while a[j] > pivot:
             j -= 1
-        a[i], a[j] = a[j], a[i]
-        if i == pivot:
-            pivot = j
-        if j == pivot:
-            pivot = i
-    return pivot
+        if i <= j:
+            a[i], a[j] = a[j], a[i]
+            i += 1
+            j -= 1
+    return i
 
 def max_heapify(a,i,n):
     if i <= n/2:
@@ -170,14 +170,14 @@ def heap_sort(a):
     return b
 
 if __name__=="__main__":
-    arr = [0]*1000000
-    for x in range(1000000):
-        arr[x] = randint(0,100)
-    print "initializing...................................."
+    #arr = [0]*1000000
+    #for x in range(1000000):
+    #    arr[x] = randint(0,100)
+    #print "initializing...................................."
     #arr = [0,1,2,3,4,5,6,7,8,9]
-    arr = [7,8,8,8,7,7,7,7,7,7]
-    arr = [4,5,6,9,3,2,1]
-    first = 1
+    #arr = [7,8,8,8,7,7,7,7,7,7]
+    arr = [1,9,3,1,9,2,3,9,6]
+    first = 0
     last = len(arr) - 1
     #quickSort(arr,0,9)
     #bubble = benchMark(bubbleSort)
@@ -194,8 +194,10 @@ if __name__=="__main__":
     #selection2(arr)
     #insertion(arr)
     #insertion2(arr)
-    #quick(arr,first,last)
-    print heap(arr)
+    #partition(arr, first, last)
+    quick(arr,first,last)
+    print arr
+    #print heap(arr)
     #print merge(arr,first,last)
     #print merge2(arr)
     #t1 = Timer(" bubbleSort(arr)", "from __main__ import bubbleSort")
