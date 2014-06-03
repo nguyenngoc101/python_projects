@@ -1,4 +1,14 @@
-import sys
-import os
+say = "Hello"
 
-import graphics
+class Hello:
+    say = "hahah"
+    def __init__(self):
+        pass
+
+    @classmethod
+    def say_hello(self):
+        print say
+
+
+def say_goodbye():
+    print "goodbye"
